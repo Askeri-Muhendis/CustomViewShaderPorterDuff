@@ -18,7 +18,7 @@ class BitmapShaderCustom @JvmOverloads constructor(
     private val shaderMM = BitmapShader(bitmap,Shader.TileMode.MIRROR,Shader.TileMode.MIRROR)
 
     private val paintB = Paint().apply {
-        shader = shaderCC
+        shader = shaderMM
     }
 
     override fun onDraw(canvas: Canvas) {

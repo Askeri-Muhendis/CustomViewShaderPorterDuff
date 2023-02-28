@@ -9,11 +9,11 @@ class ComposeShader @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null
 )  : View(context,attributeSet){
-    private val moon = BitmapFactory.decodeResource(resources, R.drawable.human)
-    private val destinationShader = BitmapShader(moon,Shader.TileMode.CLAMP,Shader.TileMode.CLAMP)
+    private val humanBackground = BitmapFactory.decodeResource(resources, R.drawable.human)
+    private val destinationShader = BitmapShader(humanBackground,Shader.TileMode.CLAMP,Shader.TileMode.CLAMP)
 
-    private val star = BitmapFactory.decodeResource(resources, R.drawable.heart)
-    private val sourceShader = BitmapShader(star,Shader.TileMode.MIRROR,Shader.TileMode.MIRROR)
+    private val heart = BitmapFactory.decodeResource(resources, R.drawable.heart)
+    private val sourceShader = BitmapShader(heart,Shader.TileMode.MIRROR,Shader.TileMode.MIRROR)
 
     private val composeShaderD = ComposeShader(destinationShader,sourceShader,PorterDuff.Mode.DST)
     private val composeShaderDA = ComposeShader(destinationShader,sourceShader,PorterDuff.Mode.DST_ATOP)
@@ -22,12 +22,22 @@ class ComposeShader @JvmOverloads constructor(
     private val composeShaderL = ComposeShader(destinationShader,sourceShader,PorterDuff.Mode.LIGHTEN)
     private val composeShaderDN = ComposeShader(destinationShader,sourceShader,PorterDuff.Mode.DARKEN)
 
+    private val user = BitmapFactory.decodeResource(resources, R.drawable.mask)
+    private val destinationShaderU = BitmapShader(user,Shader.TileMode.CLAMP,Shader.TileMode.CLAMP)
+
+    private val background = BitmapFactory.decodeResource(resources, R.drawable.wolf_user)
+    private val sourceShaderU = BitmapShader(background,Shader.TileMode.MIRROR,Shader.TileMode.MIRROR)
+
+    private val composeShaderA = ComposeShader(destinationShaderU,sourceShaderU,PorterDuff.Mode.SRC_IN)
+
+
     private val composePaint = Paint().apply {
-        shader = composeShaderD
+        shader = composeShaderDO
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        //canvas.drawColor(Color.YELLOW)
         canvas.drawRect(0f,0f,1000f,1600f,composePaint)
     }
 }
